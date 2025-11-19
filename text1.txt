@@ -1,0 +1,3 @@
+Apple is red. Banana is yellow!
+I like oranges, but not 123abc.
+Hello world!
