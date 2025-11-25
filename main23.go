@@ -10,7 +10,7 @@ import (
 )
 
 func main() {
-	// Открываем файл f.txt
+	
 	file, err := os.Open("f.txt")
 	if err != nil {
 		fmt.Println("Ошибка открытия f.txt:", err)
@@ -23,7 +23,7 @@ func main() {
 	var even []int
 	var odd []int
 
-	// Считываем все числа
+	
 	for scanner.Scan() {
 		line := scanner.Text()
 		parts := strings.Fields(line)
@@ -40,20 +40,20 @@ func main() {
 		}
 	}
 
-	// Сортируем: чётные по возрастанию
+	
 	sort.Ints(even)
 
-	// Нечётные по убыванию
+	
 	sort.Sort(sort.Reverse(sort.IntSlice(odd)))
 
-	// Создаём и записываем even.txt
+	
 	evenFile, _ := os.Create("even.txt")
 	defer evenFile.Close()
 	for _, v := range even {
 		evenFile.WriteString(fmt.Sprintf("%d ", v))
 	}
 
-	// Создаём и записываем odd.txt
+	
 	oddFile, _ := os.Create("odd.txt")
 	defer oddFile.Close()
 	for _, v := range odd {

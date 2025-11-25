@@ -41,7 +41,7 @@ func processNumbers() {
 			continue
 		}
 
-		// Преобразуем числа
+		
 		numbers := []int{}
 		for _, p := range parts {
 			n, err := strconv.Atoi(p)
@@ -55,7 +55,7 @@ func processNumbers() {
 			continue
 		}
 
-		// Максимум
+		
 		maxVal := numbers[0]
 		for _, v := range numbers {
 			if v > maxVal {
@@ -65,7 +65,7 @@ func processNumbers() {
 
 		sumMax += maxVal
 
-		// Числа < первого максимального
+		
 		fmt.Println("Строка", lineNum, "числа меньше первого максимального:")
 		for _, v := range numbers {
 			if v < maxVal {
@@ -75,7 +75,7 @@ func processNumbers() {
 		}
 		out3.WriteString("\n")
 
-		// Пишем в number2.txt
+		
 		res := fmt.Sprintf("Result = %d %d\n", lineNum, maxVal)
 		fmt.Print(res)
 		out2.WriteString(res)

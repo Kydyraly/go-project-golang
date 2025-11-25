@@ -10,14 +10,14 @@ import (
 )
 
 const (
-	m   = 3 // количество строк в одной матрице
-	n   = 4 // количество столбцов в одной матрице
+	m   = 3 
+	n   = 4 
 	eps = 1e-9
 )
 
 type Matrix [m][n]float64
 
-// Чтение всех матриц из текстового файла
+
 func readTextMatrices(filename string) ([]Matrix, error) {
 	file, err := os.Open(filename)
 	if err != nil {
@@ -34,9 +34,8 @@ func readTextMatrices(filename string) ([]Matrix, error) {
 	for scanner.Scan() {
 		line := strings.TrimSpace(scanner.Text())
 
-		// Пропускаем полностью пустые строки (разделители между матрицами)
 		if line == "" {
-			if currentRow > 0 { // если уже начали читать матрицу
+			if currentRow > 0 { 
 				if currentRow != m {
 					return nil, fmt.Errorf("матрица неполная в файле %s", filename)
 				}
@@ -46,7 +45,6 @@ func readTextMatrices(filename string) ([]Matrix, error) {
 			continue
 		}
 
-		// Читаем строку матрицы
 		if currentRow >= m {
 			return nil, fmt.Errorf("слишком много строк в матрице в файле %s", filename)
 		}
@@ -67,11 +65,10 @@ func readTextMatrices(filename string) ([]Matrix, error) {
 		currentRow++
 		if currentRow == m {
 			matrices = append(matrices, mat)
-			currentRow = 0 // готовимся к следующей матрице
+			currentRow = 0 
 		}
 	}
 
-	// Если в конце осталась незавершённая матрица
 	if currentRow > 0 && currentRow != m {
 		return nil, fmt.Errorf("последняя матрица неполная в файле %s", filename)
 	}
@@ -83,7 +80,6 @@ func readTextMatrices(filename string) ([]Matrix, error) {
 	return matrices, nil
 }
 
-// Дописывание матриц в текстовый файл
 func appendTextMatrices(filename string, matrices []Matrix) error {
 	file, err := os.OpenFile(filename, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
 	if err != nil {
@@ -102,12 +98,11 @@ func appendTextMatrices(filename string, matrices []Matrix) error {
 			}
 			fmt.Fprintln(writer)
 		}
-		fmt.Fprintln(writer) // пустая строка-разделитель
+		fmt.Fprintln(writer) 
 	}
 	return writer.Flush()
 }
 
-// Сравнение матриц с погрешностью
 func matricesEqual(a, b Matrix) bool {
 	for i := 0; i < m; i++ {
 		for j := 0; j < n; j++ {
@@ -128,7 +123,6 @@ func containsMatrix(haystack []Matrix, needle Matrix) bool {
 	return false
 }
 
-// Красивый вывод
 func printMatrix(mat Matrix) {
 	for i := 0; i < m; i++ {
 		for j := 0; j < n; j++ {
@@ -190,7 +184,6 @@ func main() {
 
 	fmt.Printf("Добавлено %d новых матриц во второй файл.\n\n", len(toAdd))
 
-	// Перечитываем второй файл для актуального вывода
 	mats2, _ = readTextMatrices(file2)
 
 	fmt.Println("После операции:")
